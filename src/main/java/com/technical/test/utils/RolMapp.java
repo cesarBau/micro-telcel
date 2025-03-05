@@ -7,6 +7,10 @@ import com.technical.test.entity.dto.RolDto;
 
 public class RolMapp {
 
+    private RolMapp(){
+        
+    }
+
     public static RolDto toRolDto(Rol rol) {
         return new RolDto(rol.getId(), rol.getNombre());
     }

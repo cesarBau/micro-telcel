@@ -18,7 +18,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jakarta.validation.executable.ValidateOnExecution;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
