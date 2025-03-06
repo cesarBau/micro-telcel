@@ -21,6 +21,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.technical.test.entity.Rol;
@@ -188,6 +192,22 @@ class RolServiceTest {
 
         Rol response = rolService.existById(id);
         assertNull(response);
+    }
+
+    @Order(12)
+    @Test
+    void testGetAllRol() {
+        List<Rol> data = new ArrayList<>();
+        data.add(rolEntity);
+        Sort sort = Sort.by(Sort.Direction.fromString("asc"), "id");
+        PageRequest pageable = PageRequest.of(0, 10, sort);
+        Page<Rol> result = new PageImpl<>(data);
+
+        given(rolRepository.findAll(pageable)).willReturn(result);
+
+        List<RolDto> response = rolService.findAll(0, 10, "asc", "id");
+        assertNotNull(response);
+        assertEquals(1, response.size());
     }
 
 }
