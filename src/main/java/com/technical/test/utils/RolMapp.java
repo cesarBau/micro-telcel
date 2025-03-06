@@ -7,8 +7,7 @@ import com.technical.test.entity.dto.RolDto;
 
 public class RolMapp {
 
-    private RolMapp(){
-        
+    private RolMapp() {
     }
 
     public static RolDto toRolDto(Rol rol) {
@@ -21,10 +20,6 @@ public class RolMapp {
 
     public static List<RolDto> toRolDtoList(List<Rol> roles) {
         return roles.stream().map(RolMapp::toRolDto).toList();
-    }
-
-    public static List<Rol> toRolList(List<RolDto> rolesDto) {
-        return rolesDto.stream().map(RolMapp::toRol).toList();
     }
 
 }
