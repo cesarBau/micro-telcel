@@ -120,6 +120,11 @@ public class UsuarioServImpl implements UsuarioService {
         // Casteamos y generamos el identificador para RolUsuario
         Usuario convertion = UsuarioMapp.toUsuario(usuario);
         convertion.setId((int) sequenceGeneratorService.generateSequence(Usuario.SEQUENCE_NAME));
+        // Extraemos los identificadores de los roles existentes y actualizamos
+        idRol.clear();
+        for (RolDto rol : validsRol) {
+            idRol.add(rol.getId());
+        }
         // Creamos la relacion con el rol
         RolUsuario rolUsuario = new RolUsuario();
         rolUsuario.setIdUsuario(convertion.getId());
