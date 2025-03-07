@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UsuarioDto {
 
+    @NotNull(message = "id del objeto Usuario debe ser presente")
     Integer id;
     @NotEmpty(message = "nombre del objeto Usuario no debe estar vacío")
     @NotNull(message = "nombre del objeto Usuario no debe ser nulo")
