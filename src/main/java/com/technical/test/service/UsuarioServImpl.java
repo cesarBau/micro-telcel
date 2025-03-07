@@ -54,6 +54,14 @@ public class UsuarioServImpl implements UsuarioService {
     @Override
     public List<UsuarioDto> findAll(Integer page, Integer size, String order, String field) {
         log.info("Consume service findAll");
+        if (!order.equals("asc") && !order.equals("desc")) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, MessageError.FIELD_NOT_VALID, null);
+        }
+        if (page < 0) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, MessageError.PAGE_MIN, null);
+        }
         List<UsuarioDto> response = new ArrayList<>();
         Sort sort = Sort.by(Sort.Direction.fromString(order), field);
         PageRequest pageable = PageRequest.of(page, size, sort);
