@@ -66,7 +66,7 @@ class UsuarioControllerTest {
         }
         when(usuarioService.findAll(0, 10, "asc", "id")).thenReturn(response);
         try {
-            result = mockMvc.perform(get("/usuario/"));
+            result = mockMvc.perform(get("/usuario"));
             result.andExpect(status().isOk());
         } catch (Exception e) {
             System.err.println(e);
@@ -145,7 +145,7 @@ class UsuarioControllerTest {
         ResultActions result;
         when(usuarioService.save(usuarioDto)).thenReturn(usuarioDto);
         try {
-            result = mockMvc.perform(post("/usuario/")
+            result = mockMvc.perform(post("/usuario")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(usuarioDto)));
             result.andExpect(status().isCreated());

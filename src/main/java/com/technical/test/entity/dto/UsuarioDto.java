@@ -28,6 +28,7 @@ public class UsuarioDto {
     @NotEmpty(message = "apellido_materno del objeto Usuario no debe estar vacío")
     @NotNull(message = "apellido_materno del objeto Usuario no debe ser nulo")
     String apellidoMaterno;
+    @NotNull(message = "el objeto roles debe ser presente")
     @JsonProperty("roles")
     @Valid
     List<RolDto> idRole;

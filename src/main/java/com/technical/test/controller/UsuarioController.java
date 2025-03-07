@@ -39,10 +39,14 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @Operation(summary = "Creacion de usuario", description = "fetches all plant entities and their data from data source")
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
+    }
+
+    @Operation(summary = "Creacion de usuario", description = "Solo se agregaran roles exitentes en la relacion.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "400", description = "", content = @Content) })
-    @PostMapping(value = "/", produces = "application/json", consumes = "application/json")
+    @PostMapping(value = "", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioDto createUser(@Valid @RequestBody UsuarioDto entity) {
         log.info("Consume controller createUser");
@@ -50,7 +54,7 @@ public class UsuarioController {
     }
 
     @Operation(summary = "Obtencion de todos los usuarios")
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     public List<UsuarioDto> getAllUsers(@RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "30") Integer size, @RequestParam(defaultValue = "asc") String order,
             @RequestParam(defaultValue = "id") String field) {
@@ -78,7 +82,7 @@ public class UsuarioController {
         return usuarioService.findByNombre(nombre);
     }
 
-    @Operation(summary = "Actualizacion de usuario por id")
+    @Operation(summary = "Actualizacion de usuario por id", description = "Solo se agregaran roles exitentes en la relacion.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = MessageError.USER_NOT_FOUND, content = @Content) })
     @ResponseStatus(HttpStatus.OK)
@@ -102,20 +106,20 @@ public class UsuarioController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = MessageError.USER_NOT_FOUND, content = @Content) })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(value = "/{idUser}/rol/{idRol}", produces = "application/json")
-    public void deleteRolUser(@PathVariable Integer idUser, @PathVariable Integer idRol) {
+    @DeleteMapping(value = "/{idUsuario}/rol/{idRol}", produces = "application/json")
+    public void deleteRolUser(@PathVariable Integer idUsuario, @PathVariable Integer idRol) {
         log.info("Consume controller deleteRolUser");
-        usuarioService.deleteRolByID(idUser, idRol);
+        usuarioService.deleteRolByID(idUsuario, idRol);
     }
 
-    @Operation(summary = "Insertar rol a usuario por id")
+    @Operation(summary = "Insertar rol a usuario por id", description = "Solo se agregaran roles exitentes en la relacion.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = MessageError.USER_NOT_FOUND, content = @Content) })
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping(value = "/{idUser}/rol/{idRol}", produces = "application/json")
-    public void insertRoltoUser(@PathVariable Integer idUser, @PathVariable Integer idRol) {
+    @PatchMapping(value = "/{idUsuario}/rol/{idRol}", produces = "application/json")
+    public void insertRoltoUser(@PathVariable Integer idUsuario, @PathVariable Integer idRol) {
         log.info("Consume controller insertRoltoUser");
-        usuarioService.insertRolByID(idUser, idRol);
+        usuarioService.insertRolByID(idUsuario, idRol);
     }
 
 }

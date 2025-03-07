@@ -3,6 +3,7 @@ package com.technical.test.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -115,6 +116,7 @@ public class UsuarioServImpl implements UsuarioService {
         for (RolDto rol : usuario.getIdRole()) {
             idRol.add(rol.getId());
         }
+        idRol = idRol.stream().distinct().collect(Collectors.toList());
         // Validamos si existen los roles, solo se agregan los existentes.
         List<RolDto> validsRol = rolUsuarioService.getRols(idRol);
         // Casteamos y generamos el identificador para RolUsuario
@@ -149,6 +151,7 @@ public class UsuarioServImpl implements UsuarioService {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND, MessageError.USER_NOT_FOUND, null);
         }
+        idRol = idRol.stream().distinct().collect(Collectors.toList());
         // Extraemos los identificadores de los nuevos roles
         for (RolDto rol : usuario.getIdRole()) {
             idRol.add(rol.getId());
@@ -187,7 +190,7 @@ public class UsuarioServImpl implements UsuarioService {
         // Buscamos y eliminamos de la relacion el rol.
         RolUsuario getRolUser = rolUsuarioService.findByIdUsuario(idUsuario);
         List<Integer> rols = getRolUser.getIdRol();
-        rols.remove(new Integer(idRol));
+        rols.remove(idRol);
         getRolUser.setIdRol(rols);
         rolUsuarioService.updateByIdUsuario(getRolUser);
     }

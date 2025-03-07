@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RolDto {
 
+    @NotNull(message = "id del objeto rol debe ser presente")
     Integer id;
     @NotEmpty(message = "nombre del objeto Rol no debe estar vacío")
     @NotNull(message = "nombre del objeto Rol no debe ser nulo")

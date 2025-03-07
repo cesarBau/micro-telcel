@@ -60,7 +60,7 @@ class RolControllerTest {
         }
         when(rolService.findAll(0, 10, "asc", "id")).thenReturn(response);
         try {
-            result = mockMvc.perform(get("/rol/"));
+            result = mockMvc.perform(get("/rol"));
             result.andExpect(status().isOk());
         } catch (Exception e) {
             System.err.println(e);
@@ -92,7 +92,7 @@ class RolControllerTest {
         }
         when(rolService.findByNombre(name)).thenReturn(response);
         try {
-            result = mockMvc.perform(get("/rol/name/{name}", name));
+            result = mockMvc.perform(get("/rol/nombre/{name}", name));
             result.andExpect(status().isOk());
         } catch (Exception e) {
             System.err.println(e);
@@ -135,7 +135,7 @@ class RolControllerTest {
         ResultActions result;
         when(rolService.save(rol)).thenReturn(rol);
         try {
-            result = mockMvc.perform(post("/rol/")
+            result = mockMvc.perform(post("/rol")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsString(rol)));
             result.andExpect(status().isCreated());

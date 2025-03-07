@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface RolRepository extends MongoRepository<Rol, Integer> {
 
+    @SuppressWarnings("null")
     Optional<Rol> findById(Integer id);
 
     List<Rol> findByNombre(String nombre);

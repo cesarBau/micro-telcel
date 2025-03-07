@@ -20,13 +20,13 @@ spring.data.mongodb.database
 ```
 mvn clean install -U
 ```
-Si se necesita crear el archivo .jar se pueden omitir ejecutando el siguiente comando.
+De ser necesario crear el archivo .jar omitiendo las pruebas, se puede ejecutar el siguiente comando.
 ```
 mvn clean install -U -Dmaven.test.skip=true
 ```
 ### Se puede verificar la cobertura del código usando SonarQube.
 ```
-mvn clean verify sonar:sonar  -Dsonar.projectKey=PROJECTKEY -Dsonar.host.url=HOST -Dsonar.login=KEY
+mvn clean verify sonar:sonar -Dsonar.projectKey=PROJECTKEY -Dsonar.host.url=HOST -Dsonar.login=KEY
 ```
 ## Creación de imágenes en Docker
 ```

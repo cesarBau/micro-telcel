@@ -44,7 +44,7 @@ public class RolController {
     @Operation(summary = "Creacion de rol")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "400", description = "", content = @Content) })
-    @PostMapping(value = "/", produces = "application/json", consumes = "application/json")
+    @PostMapping(value = "", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public RolDto createRol(@Valid @RequestBody RolDto entity) {
         log.info("Consume controller createRol");
@@ -53,7 +53,7 @@ public class RolController {
 
     @Operation(summary = "Obtencion de todos los roles")
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     public List<RolDto> getAllRoll(@RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "30") Integer size, @RequestParam(defaultValue = "asc") String order,
             @RequestParam(defaultValue = "id") String field) {
@@ -79,11 +79,11 @@ public class RolController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = MessageError.ROL_NOT_FOUND, content = @Content) })
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(value = "/name/{name}", produces = "application/json")
-    public List<RolDto> getRolByName(@PathVariable String name) {
+    @GetMapping(value = "/nombre/{nombre}", produces = "application/json")
+    public List<RolDto> getRolByName(@PathVariable String nombre) {
         log.info("Consume controller getRolByName");
-        log.info("value of name: " + name);
-        return rolService.findByNombre(name);
+        log.info("value of name: " + nombre);
+        return rolService.findByNombre(nombre);
     }
 
     @Operation(summary = "Eliminacion de rol por id")
