@@ -62,6 +62,10 @@ public class UsuarioServImpl implements UsuarioService {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, MessageError.PAGE_MIN, null);
         }
+        if (size < 1) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, MessageError.SIZE_MIN, null);
+        }
         List<UsuarioDto> response = new ArrayList<>();
         Sort sort = Sort.by(Sort.Direction.fromString(order), field);
         PageRequest pageable = PageRequest.of(page, size, sort);

@@ -53,6 +53,10 @@ public class RolServImpl implements RolService {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, MessageError.PAGE_MIN, null);
         }
+        if (size < 1) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, MessageError.SIZE_MIN, null);
+        }
         Sort sort = Sort.by(Sort.Direction.fromString(order), field);
         PageRequest pageable = PageRequest.of(page, size, sort);
         List<Rol> data = rolRepository.findAll(pageable).getContent();
